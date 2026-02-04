@@ -24,6 +24,16 @@
                        style="width:100%; padding:10px;">
                         Add New Course
                     </a>
+                    @if(Session::has('success'))
+                        <div class="alert alert-success" style="text-align: center; margin-top:10px;">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger" style="text-align: center; margin-top:10px;">
+                            {{Session::get('error')}}
+                        </div>
+                    @endif
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body table-responsive p-0" style="">
@@ -50,7 +60,14 @@
                                             {{ $course->active ? 'Active' : 'Disabled' }}
                                         </span>
                                 </td>
-                                <td>Buttons here</td>
+                                <td>{{$course->created_at}}</td>
+                                <td>{{$course->updated_at}}</td>
+                                <td>
+                                    <a href="{{route('courses.edit',$course->id)}}"
+                                       class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="{{route('courses.destroy', $course->id)}}"
+                                       class="btn btn-sm btn-danger">Delete</a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
